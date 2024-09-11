@@ -7,29 +7,9 @@ pipeline {
                 checkout scm
             }
         }
-
-        stage('Install Dependencies') {
+        stage("Run console"){
             steps {
-                sh 'pip3 install -r requirements.txt'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh 'pytest' 
-            }
-        }
-
-        stage('Build Image') { // Optional: If you're containerizing your FastAPI app
-            steps {
-                sh 'docker build -t my-fastapi-app .'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Add your deployment steps here (e.g., deploy to a cloud platform, copy files to a server, etc.)
-                echo 'Deployment steps go here...'
+                sh 'python3 app.py'
             }
         }
     }
