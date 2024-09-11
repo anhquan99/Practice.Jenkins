@@ -1,6 +1,0 @@
-@Practice.Jenkins_HostAddress = http://localhost:5113
-
-GET {{Practice.Jenkins_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
