@@ -8,22 +8,31 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'cd ./src && dotnet build' 
-            }
-        }
-
         stage('Test') {
             steps {
-                sh 'cd ./src && dotnet test' 
+                sh 'cd /src && dotnet test' 
             }
         }
 
-        stage('Deploy') {
+        stage('Build image') {
             steps {
-                // Add your deployment steps here (e.g., copy to a web server, deploy to a container registry, etc.)
-                echo 'Deployment logic goes here...' 
+                sh 'docker build -t anhquan99/my-dotnet-api:latest' 
+            }
+        }
+
+        stage('Login to docker hub') {
+            environment{
+                DOCKERHUB_USER = ''
+                DOCKERHUB_PASSWORD = ''
+            }
+            steps {
+                echo 'Login to docker hub'
+                sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD' 
+            }
+        }
+        stage('Pus docker image'){
+            steps{
+                sh 'docker push anhquan99/my-dotnet-api:latest'
             }
         }
     }
