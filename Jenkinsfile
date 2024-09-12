@@ -8,8 +8,8 @@ pipeline {
         stage('print env')
         {
             steps{
-                echo '$DOCKER_USERNAME'
-                echo '$DOCKER_PASSWORD'
+                sh 'echo $DOCKER_USERNAME'
+                sh 'echo $DOCKER_PASSWORD'
             }
         }
         // stage('Checkout') {
