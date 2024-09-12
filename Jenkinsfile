@@ -10,7 +10,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'cd /src && dotnet test' 
+                sh 'cd ./src && dotnet test' 
             }
         }
 
