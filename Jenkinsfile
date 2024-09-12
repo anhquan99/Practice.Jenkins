@@ -12,6 +12,11 @@ pipeline {
                 sh 'echo $DOCKER_PASSWORD'
             }
         }
+        stage('Log into Dockerhub') {
+            steps {
+                sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+            }
+        }
         // stage('Checkout') {
         //     steps {
         //         checkout scm 
