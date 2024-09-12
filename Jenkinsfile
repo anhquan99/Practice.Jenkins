@@ -1,15 +1,29 @@
 pipeline {
-    agent any
+    agent any 
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout scm 
             }
         }
-        stage("Run console"){
+
+        stage('Build') {
             steps {
-                sh 'python3 app.py'
+                sh 'cd /src && dotnet build' 
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'cd /src && dotnet test' 
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Add your deployment steps here (e.g., copy to a web server, deploy to a container registry, etc.)
+                echo 'Deployment logic goes here...' 
             }
         }
     }
