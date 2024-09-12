@@ -16,13 +16,13 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sh 'docker build -t anhquan99/my-dotnet-api:latest .' 
+                sh 'sudo docker build -t anhquan99/my-dotnet-api:latest .' 
             }
         }
 
         stage('Pus docker image'){
             steps{
-                sh 'docker push anhquan99/my-dotnet-api:latest'
+                sh 'sudo docker push anhquan99/my-dotnet-api:latest'
             }
         }
     }
