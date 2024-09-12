@@ -1,5 +1,7 @@
+@Library('My-shared-library@master')
+
 pipeline {
-    agent any 
+    agent any
     environment {
         DOCKER_USERNAME = credentials('docker-username')
         DOCKER_PASSWORD = credentials('docker-password')
@@ -8,18 +10,20 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                checkout scm 
-            }
+                gitCheckout(
+                    branch: "main",
+                    url: "https://github.com/anhquan99/Practice.Jenkins"
+            )}
         }
 
         stage('Test') {
             steps {
-                sh 'cd ./src && dotnet test' 
+                sh 'cd ./src && dotnet test'
             }
         }
         stage('Build image') {
             steps {
-                sh 'docker build -t anhquan99/my-dotnet-api:latest .' 
+                sh 'docker build -t anhquan99/my-dotnet-api:latest .'
             }
         }
         stage('Log into Dockerhub') {
