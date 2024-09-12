@@ -10,13 +10,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'cd /src && dotnet build' 
+                sh 'cd ./src && dotnet build' 
             }
         }
 
         stage('Test') {
             steps {
-                sh 'cd /src && dotnet test' 
+                sh 'cd ./src && dotnet test' 
             }
         }
 
