@@ -14,6 +14,12 @@ pipeline {
             }
         }
 
+        stage('whoami') {
+            steps {
+                sh 'whoami' 
+            }
+        }
+
         stage('Build image') {
             steps {
                 sh 'sudo docker build -t anhquan99/my-dotnet-api:latest .' 
