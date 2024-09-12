@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sh 'docker build -t anhquan99/my-dotnet-api:latest' 
+                sh 'docker build -t anhquan99/my-dotnet-api:latest .' 
             }
         }
 
