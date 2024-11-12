@@ -1,36 +1,19 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'mcr.microsoft.com/dotnet/sdk:8.0' }
+    }
     stages {
-        stage('Setup parameters') {
+
+        stage('Checkout') {
             steps {
-                script { 
-                    properties([
-                        parameters([
-                            choice(
-                                choices: ['ONE', 'TWO'], 
-                                name: 'PARAMETER_01'
-                            ),
-                            booleanParam(
-                                defaultValue: true, 
-                                description: '', 
-                                name: 'BOOLEAN'
-                            ),
-                            text(
-                                defaultValue: '''
-                                this is a multi-line 
-                                string parameter example
-                                ''', 
-                                 name: 'MULTI-LINE-STRING'
-                            ),
-                            string(
-                                defaultValue: 'scriptcrunch', 
-                                name: 'STRING-PARAMETER', 
-                                trim: true
-                            )
-                        ])
-                    ])
-                }
+                checkout scm 
             }
         }
-    }   
+
+        stage('Test') {
+            steps {
+                sh 'cd ./src && dotnet test' 
+            }
+        }
+    }
 }
